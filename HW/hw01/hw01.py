@@ -13,9 +13,11 @@ def a_plus_abs_b(a, b):
     3
     """
     if b < 0:
-        f = _____
+        def f(x , y):
+            return x - y
     else:
-        f = _____
+        def f(x , y) :
+            return a + b
     return f(a, b)
 
 def a_plus_abs_b_syntax_check():
@@ -28,7 +30,7 @@ def a_plus_abs_b_syntax_check():
     """
     # You don't need to edit this function. It's just here to check your work.
 
-
+#err
 def two_of_three(i, j, k):
     """Return m*m + n*n, where m and n are the two smallest members of the
     positive numbers i, j, and k.
@@ -42,7 +44,9 @@ def two_of_three(i, j, k):
     >>> two_of_three(5, 5, 5)
     50
     """
-    return _____
+    abandon = max(i , j , k)
+    ans = i * i + j * j + k * k - abandon * abandon
+    return ans
 
 def two_of_three_syntax_check():
     """Check that your two_of_three code consists of nothing but a return statement.
@@ -66,6 +70,12 @@ def largest_factor(n):
     1
     """
     "*** YOUR CODE HERE ***"
+    for i in range(n - 1 , 0 , -1) :
+        if(n % i == 0) :
+            ans = i
+            break
+    return ans
+
 
 
 def hailstone(n):
@@ -88,4 +98,16 @@ def hailstone(n):
     1
     """
     "*** YOUR CODE HERE ***"
+    k = 1
+    print(n)
+    while(n != 1) :
+        k = k + 1
+        if(n % 2 == 1) :
+            n = n * 3  + 1
+        else : n = n // 2
+        print(n)
+    return k
 
+print(largest_factor(15))
+print(largest_factor(80))
+print(largest_factor(13))
