@@ -111,9 +111,9 @@ def interactive_strategy(who):
 def play_with(num_players):
     """Play a game with NUM_PLAYERS interactive (human) players."""
     if num_players == 0:
-        play_and_print(always_roll_5, always_roll_5)
+        play_and_print(final_strategy, final_strategy)
     elif num_players == 1:
-        play_and_print(interactive_strategy(0), always_roll_5)
+        play_and_print(interactive_strategy(0), final_strategy)
     elif num_players == 2:
         play_and_print(interactive_strategy(0), interactive_strategy(1))
     else:

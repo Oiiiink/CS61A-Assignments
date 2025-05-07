@@ -24,7 +24,7 @@ def make_fair_dice(sides):
 four_sided = make_fair_dice(4)
 six_sided = make_fair_dice(6)
 
-def make_test_dice(*outcomes):
+def make_test_dice(*outcomes):  #传入了一系列outcome组成一个元组
     """Return a die that cycles deterministically through OUTCOMES.
 
     >>> dice = make_test_dice(1, 2, 3)
