@@ -1,4 +1,5 @@
 from operator import add, mul
+caonima = 0
 
 square = lambda x: x * x
 
