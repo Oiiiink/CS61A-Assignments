@@ -1,4 +1,5 @@
 from operator import add, sub
+caonima = 0
 
 def a_plus_abs_b(a, b):
     """Return a+abs(b), but without calling abs.
