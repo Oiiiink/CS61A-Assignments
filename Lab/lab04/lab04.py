@@ -7,7 +7,7 @@ def divide(quotients, divisors):
     >>> divide(range(1, 5), range(20, 25))
     {1: [20, 21, 22, 23, 24], 2: [20, 22, 24], 3: [21, 24], 4: [20, 24]}
     """
-    return {____: ____ for ____ in ____}
+    return {q: [d for d in divisors if d % q == 0] for q in quotients}
 
 
 def buy(fruits_to_buy, prices, total_amount):
@@ -24,16 +24,18 @@ def buy(fruits_to_buy, prices, total_amount):
     [6 apples][2 kiwis]
     [9 apples][1 kiwi]
     """
-    def add(fruits, amount, cart):
-        if fruits == [] and amount == 0:
-            print(cart)
-        elif fruits and amount > 0:
+    def add(fruits, total, now):
+        if fruits == [] and total == 0 :
+            print(now)
+        elif fruits == [] :
+            return 
+        else :
             fruit = fruits[0]
-            price = ____
-            for k in ____:
-                # Hint: The display function will help you add fruit to the cart.
-                add(____, ____, ____)
-    add(fruits_to_buy, total_amount, '')
+            price = prices[fruit]
+            max_num = total // price
+            for i in range(max_num + 1):
+                add(fruits[1:], total-i*price, now+display(fruit, i + 1))
+    add(fruits_to_buy, total_amount - sum(prices[item] for item in fruits_to_buy), '')
 
 
 def display(fruit, count):
@@ -66,7 +68,11 @@ def distance(city_a, city_b):
     >>> distance(city_c, city_d)
     5.0
     """
-    "*** YOUR CODE HERE ***"
+    lat_a = get_lat(city_a)
+    lat_b = get_lat(city_b)
+    lon_a = get_lon(city_a)
+    lon_b = get_lon(city_b)
+    return sqrt((lat_a - lat_b) ** 2 + (lon_a - lon_b) ** 2)
 
 def closer_city(lat, lon, city_a, city_b):
     """
@@ -83,7 +89,8 @@ def closer_city(lat, lon, city_a, city_b):
     >>> closer_city(41.29, 174.78, bucharest, vienna)
     'Bucharest'
     """
-    "*** YOUR CODE HERE ***"
+    city = make_city('target', lat, lon)
+    return get_name(city_b) if distance(city, city_b) <= distance(city, city_a) else get_name(city_a)
 
 def check_city_abstraction():
     """
