@@ -27,7 +27,15 @@ def insert_items(s, before, after):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    i = 0
+    added = []
+    for i in range(len(s)):
+        if s[i] == before :
+            added.append(i)
+    i = 0
+    for i in range(len(added)):
+        s.insert(added[i] + i + 1, after)
+    return s
 
 def group_by(s, fn):
     """Return a dictionary of lists that together contain the elements of s.
@@ -40,12 +48,12 @@ def group_by(s, fn):
     {9: [-3, 3], 4: [-2, 2], 1: [-1, 1], 0: [0]}
     """
     grouped = {}
-    for ____ in ____:
-        key = ____
-        if key in grouped:
-            ____
+    for item in s:
+        key = fn(item)
+        if key in grouped.keys() :
+            grouped[key].append(item)
         else:
-            grouped[key] = ____
+            grouped[key] = [item]
     return grouped
 
 
@@ -71,7 +79,12 @@ def count_occurrences(t, n, x):
     2
     """
     "*** YOUR CODE HERE ***"
-
+    times = 0
+    for i in range(n) :
+        curr = next(t)
+        if curr == x :
+            times += 1
+    return times
 
 def repeated(t, k):
     """Return the first value in iterator t that appears k times in a row,
@@ -94,7 +107,17 @@ def repeated(t, k):
     """
     assert k > 1
     "*** YOUR CODE HERE ***"
-
+    times = 0
+    before = -1
+    while 1:
+        x = next(t)
+        if x == before:
+            times += 1
+        else :
+            times = 1
+        if times == k :
+            return x
+        before = x
 
 def sprout_leaves(t, leaves):
     """Sprout new leaves containing the labels in leaves at each leaf of
@@ -130,7 +153,10 @@ def sprout_leaves(t, leaves):
           2
     """
     "*** YOUR CODE HERE ***"
-
+    if is_leaf(t):
+        return tree(label(t), list(tree(k) for k in leaves))
+    else:
+        return tree(label(t), [sprout_leaves(branch, leaves) for branch in branches(t)])
 
 def partial_reverse(s, start):
     """Reverse part of a list in-place, starting with start up to the end of
@@ -145,8 +171,14 @@ def partial_reverse(s, start):
     [1, 2, 7, 6, 5, 3, 4]
     """
     "*** YOUR CODE HERE ***"
-
-
+    rev = list(reversed(s))
+    for i in range(len(s)):
+        if s[i] == start :
+            i += 1
+            j = iter(rev)
+            while i < len(s):
+                s[i] = next(j)
+                i += 1
 
 # Tree Data Abstraction
 
