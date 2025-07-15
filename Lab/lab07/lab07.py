@@ -39,7 +39,14 @@ class Account:
     def time_to_retire(self, amount):
         """Return the number of years until balance would grow to amount."""
         assert self.balance > 0 and amount > 0 and self.interest > 0
-        "*** YOUR CODE HERE ***"
+        curr = self.balance
+        years = 0
+        while 1:
+            years += 1
+            curr *= 1 + self.interest
+            if curr >= amount:
+                break 
+        return years
 
 
 class FreeChecking(Account):
@@ -69,7 +76,21 @@ class FreeChecking(Account):
     withdraw_fee = 1
     free_withdrawals = 2
 
-    "*** YOUR CODE HERE ***"
+    def __init__(self, account_holder):
+        self.balance = 0
+        self.withdrawal_times = 0
+        self.holder = account_holder
+    
+    def withdraw(self, amount):
+        self.withdrawal_times += 1
+        if self.withdrawal_times > FreeChecking.free_withdrawals:
+            amount += FreeChecking.withdraw_fee
+        if amount > self.balance:
+            return "Insufficient funds"
+        if amount > self.max_withdrawal:
+            return "Can't withdraw that amount"
+        self.balance = self.balance - amount
+        return self.balance
 
 
 def without(s, i):
@@ -85,8 +106,15 @@ def without(s, i):
     >>> without(s, 4) is not s  # Make sure a copy is created
     True
     """
-    "*** YOUR CODE HERE ***"
-
+    if s is Link.empty:
+        return s
+    elif i == 0:
+        if s.rest == Link.empty:
+            return Link.empty
+        else:
+            return Link(s.rest.first, s.rest.rest)
+    else:
+        return Link(s.first, without(s.rest, i-1))
 
 def duplicate_link(s, val):
     """Mutates s so that each element equal to val is followed by another val.
@@ -105,7 +133,10 @@ def duplicate_link(s, val):
     Link(1, Link(2, Link(2, Link(2, Link(2, Link(3))))))
     """
     "*** YOUR CODE HERE ***"
-
+    if s is not Link.empty:
+        duplicate_link(s.rest, val)
+        if s.first == val:
+            s.rest = Link(val, s.rest)
 
 class Link:
     """A linked list.
