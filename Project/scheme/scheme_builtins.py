@@ -156,6 +156,7 @@ def _arith(fn, init, vals):
     """Perform the FN operation on the number values of VALS, with INIT as
     the value when VALS is empty. Returns the result as a Scheme value."""
     _check_nums(*vals)
+    
     s = init
     for val in vals:
         s = fn(s, val)
